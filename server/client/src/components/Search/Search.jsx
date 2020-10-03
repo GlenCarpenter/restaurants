@@ -4,7 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 
 const Search = props => {
-  const { states, genres } = props;
+  const { states, genres, setData } = props;
+
+  const [searchValue, setSearchValue] = useState("");
+  const [stateValue, setStateValue] = useState("");
+  const [genreValue, setGenreValue] = useState("");
+
   const formCss = css`
     width: 95%;
     display: flex;
@@ -12,10 +17,14 @@ const Search = props => {
     align-items: center;
   `;
 
-  const inputCss = css`
+  const formElementCss = css`
     padding: 12px;
     border-radius: 12px;
     margin: 8px;
+  `;
+
+  const inputCss = css`
+    width: 320px;
   `;
 
   const buttonCss = css`
@@ -29,6 +38,23 @@ const Search = props => {
     }
   `;
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(searchValue, stateValue, genreValue);
+    axios
+      .post("/api/data", {
+        searchValue,
+        stateValue,
+        genreValue
+      })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   const renderOptions = options =>
     options.map((option, i) => (
       <option key={option + i} value={option}>
@@ -40,8 +66,7 @@ const Search = props => {
     <form
       css={formCss}
       onSubmit={e => {
-        e.preventDefault();
-        // axios.post
+        handleSubmit(e);
       }}
     >
       <div
@@ -50,9 +75,31 @@ const Search = props => {
           vertical-align: middle;
         `}
       >
-        <select>{renderOptions(states)}</select>
-        <select>{renderOptions(genres)}</select>
-        <input css={inputCss} type='text'></input>
+        <label for='state-select'>Filter by state:</label>
+        <select
+          id='state-select'
+          css={formElementCss}
+          value={stateValue}
+          onChange={e => setStateValue(e.target.value)}
+        >
+          {renderOptions(states)}
+        </select>
+        <label for='genre-select'>Filter by genre:</label>
+        <select
+          id='genre-select'
+          css={formElementCss}
+          value={genreValue}
+          onChange={e => setGenreValue(e.target.value)}
+        >
+          {renderOptions(genres)}
+        </select>
+        <input
+          css={[formElementCss, inputCss]}
+          type='text'
+          value={searchValue}
+          onChange={e => setSearchValue(e.target.value)}
+          placeholder='Filter by name, state, or genre'
+        ></input>
       </div>
       <button css={buttonCss}>Search</button>
     </form>
