@@ -68,6 +68,10 @@ const Search = props => {
 
   const handleReset = () => {
     setDisabled(true);
+    setSearchValue("");
+    setStateValue("");
+    setGenreValue("");
+
     axios
       .get("/api/data")
       .then(response => {
