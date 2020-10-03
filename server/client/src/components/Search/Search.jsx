@@ -11,7 +11,7 @@ const Search = props => {
   const [genreValue, setGenreValue] = useState("");
 
   const formCss = css`
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

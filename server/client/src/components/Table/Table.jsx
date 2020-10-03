@@ -12,10 +12,13 @@ const Table = props => {
   // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
 
+  const containerCss = css`
+    min-height: 50vh;
+  `;
+
   const tableCss = css`
     width: 95%;
     margin: auto;
-    min-height: 50vh;
     border-collapse: collapse;
     border: 1px solid Gray;
   `;
@@ -55,18 +58,28 @@ const Table = props => {
       </tr>
     ));
 
-  return (
+  return data.length > 0 ? (
     <Fragment>
-      <table css={tableCss}>
-        {data && (
+      <div css={containerCss}>
+        <table css={tableCss}>
           <tbody>
             {renderHeaders(data[0])}
             {renderTableData(paginatedData[page])}
           </tbody>
-        )}
-      </table>
+        </table>
+      </div>
       <Paginator pages={paginatedData.length} setPage={setPage} />
     </Fragment>
+  ) : (
+    <div
+      css={css`
+        width: 100%;
+        text-align: center;
+        margin-top: 24px;
+      `}
+    >
+      No data to display.
+    </div>
   );
 };
 
