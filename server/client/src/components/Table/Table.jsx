@@ -48,8 +48,8 @@ const Table = props => {
   );
 
   const renderTableData = data =>
-    data.map(el => (
-      <tr key={el.id}>
+    data.map((el, i) => (
+      <tr key={el.id + i}>
         {keys.map((key, i) => (
           <td css={tdCss} key={key + i}>
             {el[key]}

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<form
+  className="css-be4pyw-Search"
+  onSubmit={[Function]}
+>
+  <div
+    className="css-hbfplq-Search"
+  >
+    <label
+      htmlFor="state-select"
+    >
+      Filter by state:
+    </label>
+    <select
+      className="css-k05e83-Search"
+      disabled={false}
+      id="state-select"
+      onChange={[Function]}
+      value=""
+    />
+    <label
+      htmlFor="genre-select"
+    >
+      Filter by genre:
+    </label>
+    <select
+      className="css-k05e83-Search"
+      disabled={false}
+      id="genre-select"
+      onChange={[Function]}
+      value=""
+    />
+    <input
+      className="css-jjrghu-Search"
+      disabled={false}
+      onChange={[Function]}
+      placeholder="Filter by name, state, or genre"
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <button
+      className="css-64kzb-Search"
+      disabled={false}
+    >
+      Search
+    </button>
+    <button
+      className="css-333ipa-Search"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Reset
+    </button>
+  </div>
+</form>
+`;

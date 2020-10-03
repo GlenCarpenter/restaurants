@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { App } from "../";
+import { Table } from "../";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<App />).toJSON();
+  const tree = renderer.create(<Table data={[{}]} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
