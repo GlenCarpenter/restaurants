@@ -4,7 +4,35 @@ import PropTypes from "prop-types";
 
 const Table = props => {
   const { data } = props;
-  return <div>Table</div>;
+  const keys = ["name", "city", "state", "telephone", "genre"];
+
+  const renderHeaders = () => (
+    <tr>
+      {keys.map((key, i) => (
+        <th key={key + i}>{key}</th>
+      ))}
+    </tr>
+  );
+
+  const renderTableData = data =>
+    data.map(el => (
+      <tr key={el.id}>
+        {keys.map((key, i) => (
+          <td key={key + i}>{el[key]}</td>
+        ))}
+      </tr>
+    ));
+
+  return (
+    <table>
+      {data && (
+        <tbody>
+          {renderHeaders(data[0])}
+          {renderTableData(data)}
+        </tbody>
+      )}
+    </table>
+  );
 };
 
 Table.propTypes = {
