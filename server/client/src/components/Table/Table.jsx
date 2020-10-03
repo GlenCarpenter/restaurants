@@ -12,12 +12,34 @@ const Table = props => {
   // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
 
+  const tableCss = css`
+    width: 95%;
+    margin: auto;
+    min-height: 50vh;
+    border-collapse: collapse;
+    border: 1px solid Gray;
+  `;
+
+  const thCss = css`
+    padding: 12px;
+  `;
+  const tdCss = css`
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+  `;
   const paginatedData = paginateArray(data, 10);
 
   const renderHeaders = () => (
-    <tr>
+    <tr
+      css={css`
+        border-bottom: 1px solid gray;
+      `}
+    >
       {keys.map((key, i) => (
-        <th key={key + i}>{key}</th>
+        <th css={thCss} key={key + i}>
+          {key}
+        </th>
       ))}
     </tr>
   );
@@ -26,14 +48,16 @@ const Table = props => {
     data.map(el => (
       <tr key={el.id}>
         {keys.map((key, i) => (
-          <td key={key + i}>{el[key]}</td>
+          <td css={tdCss} key={key + i}>
+            {el[key]}
+          </td>
         ))}
       </tr>
     ));
 
   return (
     <Fragment>
-      <table>
+      <table css={tableCss}>
         {data && (
           <tbody>
             {renderHeaders(data[0])}

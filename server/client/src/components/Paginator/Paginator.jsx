@@ -14,6 +14,7 @@ const Table = props => {
     list-style-type: none;
     display: flex;
     justify-content: center;
+    padding-inline-start: 0px;
   `;
   const liCss = css`
     text-decoration: none;
