@@ -34,7 +34,7 @@ const Table = props => {
 
   for (let i = 1; i <= pages; i++) {
     pageNums.push(
-      <li css={liCss}>
+      <li css={liCss} key={"pageNum" + i}>
         <button css={buttonCss} onClick={() => setPage(i - 1)}>
           {i}
         </button>

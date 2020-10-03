@@ -9,6 +9,7 @@ const Search = props => {
   const [searchValue, setSearchValue] = useState("");
   const [stateValue, setStateValue] = useState("");
   const [genreValue, setGenreValue] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const formCss = css`
     width: 100%;
@@ -21,6 +22,9 @@ const Search = props => {
     padding: 12px;
     border-radius: 12px;
     margin: 8px;
+    &:disabled {
+      cursor: not-allowed;
+    }
   `;
 
   const inputCss = css`
@@ -37,10 +41,15 @@ const Search = props => {
     &:hover {
       cursor: pointer;
     }
+    &:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
   `;
 
   const handleSubmit = e => {
     e.preventDefault();
+    setDisabled(true);
     axios
       .post("/api/data", {
         searchValue,
@@ -53,9 +62,12 @@ const Search = props => {
       .catch(error => {
         console.error(error);
       });
+
+    setDisabled(false);
   };
 
   const handleReset = () => {
+    setDisabled(true);
     axios
       .get("/api/data")
       .then(response => {
@@ -64,6 +76,7 @@ const Search = props => {
       .catch(error => {
         console.log(error);
       });
+    setDisabled(false);
   };
 
   const renderOptions = options =>
@@ -86,21 +99,23 @@ const Search = props => {
           vertical-align: middle;
         `}
       >
-        <label for='state-select'>Filter by state:</label>
+        <label htmlFor='state-select'>Filter by state:</label>
         <select
           id='state-select'
           css={formElementCss}
           value={stateValue}
           onChange={e => setStateValue(e.target.value)}
+          disabled={disabled}
         >
           {renderOptions(states)}
         </select>
-        <label for='genre-select'>Filter by genre:</label>
+        <label htmlFor='genre-select'>Filter by genre:</label>
         <select
           id='genre-select'
           css={formElementCss}
           value={genreValue}
           onChange={e => setGenreValue(e.target.value)}
+          disabled={disabled}
         >
           {renderOptions(genres)}
         </select>
@@ -110,10 +125,13 @@ const Search = props => {
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
           placeholder='Filter by name, state, or genre'
+          disabled={disabled}
         ></input>
       </div>
       <div>
-        <button css={buttonCss}>Search</button>
+        <button css={buttonCss} disabled={disabled}>
+          Search
+        </button>
         <button
           type='button'
           onClick={handleReset}
@@ -123,6 +141,7 @@ const Search = props => {
               background-color: #4caf50;
             `
           ]}
+          disabled={disabled}
         >
           Reset
         </button>

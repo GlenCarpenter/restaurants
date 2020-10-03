@@ -5,7 +5,7 @@ import { Search, Table } from "../";
 import axios from "axios";
 
 const App = () => {
-  const [data, setData] = useState([""]);
+  const [data, setData] = useState([]);
   const [states, setStates] = useState([""]);
   const [genres, setGenres] = useState([""]);
 
