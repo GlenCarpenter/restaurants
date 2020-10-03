@@ -1,10 +1,18 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import { paginateArray } from "../../utils";
+import { Paginator } from "../";
 
 const Table = props => {
   const { data } = props;
+  // State for current paginated view
+  const [page, setPage] = useState(0);
+  // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
+
+  const paginatedData = paginateArray(data, 10);
 
   const renderHeaders = () => (
     <tr>
@@ -24,14 +32,17 @@ const Table = props => {
     ));
 
   return (
-    <table>
-      {data && (
-        <tbody>
-          {renderHeaders(data[0])}
-          {renderTableData(data)}
-        </tbody>
-      )}
-    </table>
+    <Fragment>
+      <table>
+        {data && (
+          <tbody>
+            {renderHeaders(data[0])}
+            {renderTableData(paginatedData[page])}
+          </tbody>
+        )}
+      </table>
+      <Paginator pages={paginatedData.length} setPage={setPage} />
+    </Fragment>
   );
 };
 
