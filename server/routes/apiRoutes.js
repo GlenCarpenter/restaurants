@@ -3,7 +3,7 @@ const restaurantData = require("../utils/restaurantData.json");
 // Send all data
 module.exports = app => {
   app.get("/api/data", (req, res) => {
-    res.send(restaurantData);
+    res.send(restaurantData.data);
   });
 
   app.post("/api/data", (req, res) => {
