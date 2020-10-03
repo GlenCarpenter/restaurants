@@ -28,6 +28,7 @@ const Search = props => {
   `;
 
   const buttonCss = css`
+    display: inline-block;
     margin: 12px;
     padding: 12px;
     color: #fff;
@@ -40,7 +41,6 @@ const Search = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(searchValue, stateValue, genreValue);
     axios
       .post("/api/data", {
         searchValue,
@@ -52,6 +52,17 @@ const Search = props => {
       })
       .catch(error => {
         console.error(error);
+      });
+  };
+
+  const handleReset = () => {
+    axios
+      .get("/api/data")
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
@@ -101,7 +112,21 @@ const Search = props => {
           placeholder='Filter by name, state, or genre'
         ></input>
       </div>
-      <button css={buttonCss}>Search</button>
+      <div>
+        <button css={buttonCss}>Search</button>
+        <button
+          type='button'
+          onClick={handleReset}
+          css={[
+            buttonCss,
+            css`
+              background-color: #4caf50;
+            `
+          ]}
+        >
+          Reset
+        </button>
+      </div>
     </form>
   );
 };

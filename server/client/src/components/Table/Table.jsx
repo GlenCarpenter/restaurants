@@ -78,7 +78,7 @@ const Table = props => {
         margin-top: 24px;
       `}
     >
-      No data to display.
+      No results found.
     </div>
   );
 };
