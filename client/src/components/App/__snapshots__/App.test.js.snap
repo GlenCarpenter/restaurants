@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
+Array [
   <h1
     className="css-grl78w-App"
   >
     Restaurant Guide
-  </h1>
+  </h1>,
   <form
     className="css-be4pyw-Search"
     onSubmit={[Function]}
@@ -124,11 +124,11 @@ exports[`renders correctly 1`] = `
         Reset
       </button>
     </div>
-  </form>
+  </form>,
   <div
     className="css-1dum1sc-Table"
   >
     No results found.
-  </div>
-</div>
+  </div>,
+]
 `;
