@@ -3,7 +3,7 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 
 const Paginator = props => {
-  const { pages, setPage } = props;
+  const { page, pages, setPage } = props;
   const containerCss = css`
     display: flex;
     flex-direction: column;
@@ -23,7 +23,6 @@ const Paginator = props => {
     margin: 12px;
     padding: 12px;
     color: #fff;
-    background-color: DodgerBlue;
     border-radius: 5px;
     &:hover {
       cursor: pointer;
@@ -35,7 +34,15 @@ const Paginator = props => {
   for (let i = 1; i <= pages; i++) {
     pageNums.push(
       <li css={liCss} key={"pageNum" + i}>
-        <button css={buttonCss} onClick={() => setPage(i - 1)}>
+        <button
+          css={[
+            buttonCss,
+            css`
+              background-color: ${page === i - 1 ? "#4caf50" : "DodgerBlue"};
+            `
+          ]}
+          onClick={() => setPage(i - 1)}
+        >
           {i}
         </button>
       </li>

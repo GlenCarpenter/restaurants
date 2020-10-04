@@ -6,9 +6,7 @@ import { paginateArray } from "../../utils";
 import { Paginator } from "../";
 
 const Table = props => {
-  const { data } = props;
-  // State for current paginated view
-  const [page, setPage] = useState(0);
+  const { data, page, setPage } = props;
   // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
   const paginatedData = paginateArray(data, 10);
@@ -122,7 +120,7 @@ const Table = props => {
           </tbody>
         </table>
       </div>
-      <Paginator pages={paginatedData.length} setPage={setPage} />
+      <Paginator pages={paginatedData.length} page={page} setPage={setPage} />
     </Fragment>
   ) : (
     <div

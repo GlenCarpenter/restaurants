@@ -9,6 +9,8 @@ const App = () => {
   const [states, setStates] = useState([""]);
   const [genres, setGenres] = useState([""]);
   const [attire, setAttire] = useState([""]);
+  // State for current paginated view
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     // Initial load of data
@@ -55,7 +57,19 @@ const App = () => {
       });
   }, []);
 
-  const searchProps = { states, genres, attire, data, setData };
+  useEffect(() => {
+    // Go back to first page when data changes
+    setPage(0);
+  }, [data]);
+
+  const SearchProps = { states, genres, attire, data, setData };
+
+  const TableProps = {
+    data,
+    setData,
+    page,
+    setPage
+  };
 
   return (
     <Fragment>
@@ -67,8 +81,8 @@ const App = () => {
       >
         Restaurant Guide
       </h1>
-      <Search {...searchProps} />
-      <Table data={data} setData={setData} />
+      <Search {...SearchProps} />
+      <Table {...TableProps} />
     </Fragment>
   );
 };
