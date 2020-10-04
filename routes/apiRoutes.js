@@ -60,14 +60,17 @@ module.exports = app => {
 
     let filteredData = restaurantData.data;
 
+    // Apply filters to filteredData array
     filteredData = filterByKey(filteredData, "state", stateValue);
     filteredData = filterByKey(filteredData, "genre", genreValue);
     filteredData = filterByKey(filteredData, "attire", attireValue);
     filteredData = filterByValue(filteredData, searchValue);
 
+    // Finally sort the data by either name or state
+    const __sortBy = sortBy || "name";
     const sortedData = filteredData
       ? filteredData.sort((a, b) =>
-          a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0
+          a[__sortBy] > b[__sortBy] ? 1 : b[__sortBy] > a[__sortBy] ? -1 : 0
         )
       : null;
     res.send(sortedData);
