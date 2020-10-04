@@ -4,11 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 
 const Search = props => {
-  const { states, genres, setData } = props;
+  const { states, genres, attire, setData } = props;
 
   const [searchValue, setSearchValue] = useState("");
   const [stateValue, setStateValue] = useState("");
   const [genreValue, setGenreValue] = useState("");
+  const [attireValue, setAttireValue] = useState("");
   const [disabled, setDisabled] = useState(false);
 
   const formCss = css`
@@ -54,7 +55,8 @@ const Search = props => {
       .post("/api/data", {
         searchValue,
         stateValue,
-        genreValue
+        genreValue,
+        attireValue
       })
       .then(response => {
         setData(response.data);
@@ -71,6 +73,7 @@ const Search = props => {
     setSearchValue("");
     setStateValue("");
     setGenreValue("");
+    setAttireValue("");
 
     axios
       .get("/api/data")
@@ -122,6 +125,16 @@ const Search = props => {
           disabled={disabled}
         >
           {renderOptions(genres)}
+        </select>
+        <label htmlFor='attire-select'>Filter by attire:</label>
+        <select
+          id='attire-select'
+          css={formElementCss}
+          value={attireValue}
+          onChange={e => setAttireValue(e.target.value)}
+          disabled={disabled}
+        >
+          {renderOptions(attire)}
         </select>
         <input
           css={[formElementCss, inputCss]}

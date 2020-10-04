@@ -8,8 +8,11 @@ const App = () => {
   const [data, setData] = useState([]);
   const [states, setStates] = useState([""]);
   const [genres, setGenres] = useState([""]);
+  const [attire, setAttire] = useState([""]);
 
   useEffect(() => {
+    // Update window name
+    window.document.title = "Restaurant Guide";
     // Initial load of data
     axios
       .get("/api/data")
@@ -20,7 +23,6 @@ const App = () => {
         console.log(error);
       });
 
-    // Initial load of data
     axios
       .get("/api/states")
       .then(response => {
@@ -32,7 +34,6 @@ const App = () => {
         console.log(error);
       });
 
-    // Initial load of data
     axios
       .get("/api/genres")
       .then(response => {
@@ -43,7 +44,20 @@ const App = () => {
       .catch(error => {
         console.log(error);
       });
+
+    axios
+      .get("/api/attire")
+      .then(response => {
+        const data = response.data;
+        data.unshift("");
+        setAttire(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
+
+  const searchProps = { states, genres, attire, setData };
 
   return (
     <div>
@@ -55,7 +69,7 @@ const App = () => {
       >
         Restaurant Guide
       </h1>
-      <Search states={states} genres={genres} setData={setData} />
+      <Search {...searchProps} />
       <Table data={data} setData={setData} />
     </div>
   );

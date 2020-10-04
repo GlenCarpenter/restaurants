@@ -15,6 +15,14 @@ module.exports = app => {
     res.send(states);
   });
 
+  // Return a sorted list of unique values for states
+  app.get("/api/attire", (req, res) => {
+    const attire = [
+      ...new Set(restaurantData.data.map(el => el.attire.toLowerCase()))
+    ].sort();
+    res.send(attire);
+  });
+
   // Return a sorted list of unique values for genres
   app.get("/api/genres", (req, res) => {
     const genres = [...new Set(restaurantData.data.map(el => el.genre))];
@@ -28,7 +36,7 @@ module.exports = app => {
 
   // Return a sorted list of restaurants filtered by state, genre, or name
   app.post("/api/data", (req, res) => {
-    const { searchValue, stateValue, genreValue } = req.body;
+    const { searchValue, stateValue, genreValue, attireValue } = req.body;
 
     const keys = ["name", "state", "genre"];
 
@@ -48,6 +56,7 @@ module.exports = app => {
 
     filteredData = filterByKey(filteredData, "state", stateValue);
     filteredData = filterByKey(filteredData, "genre", genreValue);
+    filteredData = filterByKey(filteredData, "attire", attireValue);
     filteredData = filterByValue(filteredData, searchValue);
 
     const sortedData = filteredData
