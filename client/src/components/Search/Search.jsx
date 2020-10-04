@@ -1,17 +1,25 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { useState } from "react";
-import axios from "axios";
 
 const Search = props => {
-  const { states, genres, attire, setData } = props;
-
-  const [searchValue, setSearchValue] = useState("");
-  const [stateValue, setStateValue] = useState("");
-  const [genreValue, setGenreValue] = useState("");
-  const [attireValue, setAttireValue] = useState("");
-  const [disabled, setDisabled] = useState(false);
-  const [sortBy, setSortBy] = useState("name");
+  const {
+    states,
+    genres,
+    attire,
+    searchValue,
+    setSearchValue,
+    stateValue,
+    setStateValue,
+    genreValue,
+    setGenreValue,
+    attireValue,
+    setAttireValue,
+    disabled,
+    sortBy,
+    setSortBy,
+    handleSubmit,
+    handleReset
+  } = props;
 
   const formCss = css`
     width: 100%;
@@ -48,46 +56,6 @@ const Search = props => {
       cursor: not-allowed;
     }
   `;
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setDisabled(true);
-    axios
-      .post("/api/data", {
-        searchValue,
-        stateValue,
-        genreValue,
-        attireValue,
-        sortBy
-      })
-      .then(response => {
-        setData(response.data);
-        setDisabled(false);
-      })
-      .catch(error => {
-        console.error(error);
-        setDisabled(false);
-      });
-  };
-
-  const handleReset = () => {
-    setDisabled(true);
-    setSearchValue("");
-    setStateValue("");
-    setGenreValue("");
-    setAttireValue("");
-    setSortBy("name");
-
-    axios
-      .get("/api/data")
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    setDisabled(false);
-  };
 
   const renderOptions = options =>
     options.map((option, i) => (
@@ -193,10 +161,6 @@ const Search = props => {
   );
 };
 
-Search.defaultProps = {
-  states: [],
-  genres: [],
-  attire: []
-};
+Search.defaultProps = {};
 
 export default Search;
