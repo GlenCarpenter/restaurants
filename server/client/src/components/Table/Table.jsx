@@ -76,20 +76,36 @@ const Table = props => {
         </tr>
         <tr css={infoCss}>
           <td colSpan={keys.length}>
-            {Object.keys(el).map((key, i) => {
-              const Element = key === "website" ? "a" : "p";
-              const value =
-                key === "website"
-                  ? "Click here to visit website"
-                  : `${key}: ${el[key]}`;
-              const attributes =
-                key === "website" ? { href: el[key], target: "_blank" } : {};
-              return (
-                <Element key={key + i} {...attributes}>
-                  {value}{" "}
-                </Element>
-              );
-            })}
+            {Object.keys(el)
+              .filter(key => !keys.includes(key))
+              .map((key, i) => {
+                const Element = key === "website" ? "a" : "p";
+                const value =
+                  key === "website"
+                    ? "Click here to visit website"
+                    : `${key}: ${el[key]}`;
+                const attributes =
+                  key === "website" ? { href: el[key], target: "_blank" } : {};
+                return (
+                  <Element
+                    key={key + i}
+                    {...attributes}
+                    css={css`
+                      display: block;
+                      margin: 0;
+                      padding: 8px 0;
+                      &:hover {
+                        color: ${key === "website" ? "Tomato" : "#fff"};
+                        background-color: Gray;
+                      }
+                      ${key === "website" &&
+                      `color: DodgerBlue; text-decoration: none;`}
+                    `}
+                  >
+                    {value}{" "}
+                  </Element>
+                );
+              })}
           </td>
         </tr>
       </Fragment>
