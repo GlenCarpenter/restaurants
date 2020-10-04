@@ -48,15 +48,53 @@ const Table = props => {
   );
 
   const renderTableData = data =>
-    data.map((el, i) => (
-      <tr key={el.id + i}>
-        {keys.map((key, i) => (
-          <td css={tdCss} key={key + i}>
-            {el[key]}
+    data.map((el, i) => <TableRow key={el.id + i} el={el} />);
+
+  const TableRow = props => {
+    const [visible, setVisible] = useState(false);
+    const { el } = props;
+    const trCss = css`
+      &:hover {
+        color: #fff;
+        background-color: DodgerBlue;
+        cursor: pointer;
+      }
+    `;
+    const infoCss = css`
+      background-color: LightGray;
+      text-align: center;
+      ${!visible && `display: none;`}
+    `;
+    return (
+      <Fragment>
+        <tr onClick={() => setVisible(!visible)} css={trCss}>
+          {keys.map((key, i) => (
+            <td css={tdCss} key={key + i}>
+              {el[key]}
+            </td>
+          ))}
+        </tr>
+        <tr css={infoCss}>
+          <td colSpan={keys.length}>
+            {Object.keys(el).map((key, i) => {
+              const Element = key === "website" ? "a" : "p";
+              const value =
+                key === "website"
+                  ? "Click here to visit website"
+                  : `${key}: ${el[key]}`;
+              const attributes =
+                key === "website" ? { href: el[key], target: "_blank" } : {};
+              return (
+                <Element key={key + i} {...attributes}>
+                  {value}{" "}
+                </Element>
+              );
+            })}
           </td>
-        ))}
-      </tr>
-    ));
+        </tr>
+      </Fragment>
+    );
+  };
 
   return data.length > 0 ? (
     <Fragment>
