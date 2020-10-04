@@ -2,13 +2,13 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="css-1m8njz9-Table"
+  className="css-cixvnn-Paginator"
 >
   <div>
     Page
   </div>
   <ul
-    className="css-yk9mnw-Table"
+    className="css-qrcrqc-Paginator"
   />
 </div>
 `;

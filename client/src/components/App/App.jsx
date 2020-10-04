@@ -11,8 +11,6 @@ const App = () => {
   const [attire, setAttire] = useState([""]);
 
   useEffect(() => {
-    // Update window name
-    window.document.title = "Restaurant Guide";
     // Initial load of data
     axios
       .get("/api/data")

@@ -69,19 +69,19 @@ Array [
     </table>
   </div>,
   <div
-    className="css-1m8njz9-Table"
+    className="css-cixvnn-Paginator"
   >
     <div>
       Page
     </div>
     <ul
-      className="css-yk9mnw-Table"
+      className="css-qrcrqc-Paginator"
     >
       <li
-        className="css-1affkng-Table"
+        className="css-15qm77f-Paginator"
       >
         <button
-          className="css-13d4arg-Table"
+          className="css-rs2nx7-Paginator"
           onClick={[Function]}
         >
           1
