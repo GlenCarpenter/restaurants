@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Search, Table } from "../";
 import axios from "axios";
 
@@ -55,10 +55,10 @@ const App = () => {
       });
   }, []);
 
-  const searchProps = { states, genres, attire, data,setData };
+  const searchProps = { states, genres, attire, data, setData };
 
   return (
-    <div>
+    <Fragment>
       <h1
         css={css`
           width: 100%;
@@ -69,7 +69,7 @@ const App = () => {
       </h1>
       <Search {...searchProps} />
       <Table data={data} setData={setData} />
-    </div>
+    </Fragment>
   );
 };
 
