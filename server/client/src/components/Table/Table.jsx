@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { paginateArray } from "../../utils";
 import { Paginator } from "../";
@@ -11,13 +11,7 @@ const Table = props => {
   const [page, setPage] = useState(0);
   // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
-
-  const [paginatedData, setPaginatedData] = useState(null);
-
-  useEffect(() => {
-    console.log("Made it");
-    setPaginatedData(paginateArray(data, 10));
-  }, [data]);
+  const paginatedData = paginateArray(data, 10);
 
   const containerCss = css`
     min-height: 50vh;
