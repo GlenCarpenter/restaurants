@@ -38,7 +38,10 @@ Array [
             genre
           </th>
         </tr>
-        <tr>
+        <tr
+          className="css-b655q3-TableRow"
+          onClick={[Function]}
+        >
           <td
             className="css-1m5hrta"
           />
@@ -53,6 +56,13 @@ Array [
           />
           <td
             className="css-1m5hrta"
+          />
+        </tr>
+        <tr
+          className="css-6f2rk4-TableRow"
+        >
+          <td
+            colSpan={5}
           />
         </tr>
       </tbody>

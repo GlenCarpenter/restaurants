@@ -32,6 +32,18 @@ exports[`renders correctly 1`] = `
       onChange={[Function]}
       value=""
     />
+    <label
+      htmlFor="attire-select"
+    >
+      Filter by attire:
+    </label>
+    <select
+      className="css-k05e83-Search"
+      disabled={false}
+      id="attire-select"
+      onChange={[Function]}
+      value=""
+    />
     <input
       className="css-jjrghu-Search"
       disabled={false}
@@ -40,6 +52,37 @@ exports[`renders correctly 1`] = `
       type="text"
       value=""
     />
+  </div>
+  <div>
+    Sort by:
+    <input
+      checked={true}
+      disabled={false}
+      id="name"
+      name="sort"
+      onChange={[Function]}
+      type="radio"
+      value="name"
+    />
+    <label
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <input
+      checked={false}
+      disabled={false}
+      id="state"
+      name="sort"
+      onChange={[Function]}
+      type="radio"
+      value="state"
+    />
+    <label
+      htmlFor="state"
+    >
+      State
+    </label>
   </div>
   <div>
     <button

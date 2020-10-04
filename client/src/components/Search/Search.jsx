@@ -195,6 +195,8 @@ const Search = props => {
 
 Search.defaultProps = {
   states: [],
-  genres: []
+  genres: [],
+  attire: []
 };
+
 export default Search;
