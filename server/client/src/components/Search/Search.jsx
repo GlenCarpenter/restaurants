@@ -11,6 +11,7 @@ const Search = props => {
   const [genreValue, setGenreValue] = useState("");
   const [attireValue, setAttireValue] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [sortBy, setSortBy] = useState("name");
 
   const formCss = css`
     width: 100%;
@@ -56,7 +57,8 @@ const Search = props => {
         searchValue,
         stateValue,
         genreValue,
-        attireValue
+        attireValue,
+        sortBy
       })
       .then(response => {
         setData(response.data);
@@ -74,6 +76,7 @@ const Search = props => {
     setStateValue("");
     setGenreValue("");
     setAttireValue("");
+    setSortBy("name");
 
     axios
       .get("/api/data")
@@ -144,6 +147,27 @@ const Search = props => {
           placeholder='Filter by name, state, or genre'
           disabled={disabled}
         ></input>
+      </div>
+      <div>
+        Sort by:
+        <input
+          type='radio'
+          id='name'
+          name='sort'
+          value='name'
+          checked={sortBy === "name"}
+          onChange={e => setSortBy(e.target.value)}
+        />
+        <label htmlFor='name'>Name</label>
+        <input
+          type='radio'
+          id='state'
+          name='sort'
+          value='state'
+          checked={sortBy === "state"}
+          onChange={e => setSortBy(e.target.value)}
+        />
+        <label htmlFor='state'>State</label>
       </div>
       <div>
         <button css={buttonCss} disabled={disabled}>

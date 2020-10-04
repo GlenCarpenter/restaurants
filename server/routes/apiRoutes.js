@@ -36,7 +36,13 @@ module.exports = app => {
 
   // Return a sorted list of restaurants filtered by state, genre, or name
   app.post("/api/data", (req, res) => {
-    const { searchValue, stateValue, genreValue, attireValue } = req.body;
+    const {
+      searchValue,
+      stateValue,
+      genreValue,
+      attireValue,
+      sortBy
+    } = req.body;
 
     const keys = ["name", "state", "genre"];
 
@@ -61,7 +67,7 @@ module.exports = app => {
 
     const sortedData = filteredData
       ? filteredData.sort((a, b) =>
-          a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+          a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0
         )
       : null;
     res.send(sortedData);

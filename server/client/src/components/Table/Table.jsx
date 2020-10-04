@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { paginateArray } from "../../utils";
 import { Paginator } from "../";
@@ -11,6 +11,13 @@ const Table = props => {
   const [page, setPage] = useState(0);
   // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
+
+  const [paginatedData, setPaginatedData] = useState(null);
+
+  useEffect(() => {
+    console.log("Made it");
+    setPaginatedData(paginateArray(data, 10));
+  }, [data]);
 
   const containerCss = css`
     min-height: 50vh;
@@ -31,7 +38,6 @@ const Table = props => {
     text-align: center;
     vertical-align: middle;
   `;
-  const paginatedData = paginateArray(data, 10);
 
   const renderHeaders = () => (
     <tr
@@ -118,7 +124,7 @@ const Table = props => {
         <table css={tableCss}>
           <tbody>
             {renderHeaders(data[0])}
-            {renderTableData(paginatedData[page])}
+            {paginatedData.length > 0 && renderTableData(paginatedData[page])}
           </tbody>
         </table>
       </div>

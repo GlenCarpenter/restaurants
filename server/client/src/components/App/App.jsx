@@ -57,7 +57,7 @@ const App = () => {
       });
   }, []);
 
-  const searchProps = { states, genres, attire, setData };
+  const searchProps = { states, genres, attire, data,setData };
 
   return (
     <div>
