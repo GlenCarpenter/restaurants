@@ -9,3 +9,6 @@ From the ./server/client directory, run the command `npm run build`
 
 From the ./server directory, run the command `npm install`  
 From the ./server directory, run the command `npm start`
+
+
+[View this app on the web](https://restaurants-coding-challenge.herokuapp.com/)
