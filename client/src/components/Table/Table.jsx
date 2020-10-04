@@ -9,7 +9,7 @@ const Table = props => {
   const { data, page, setPage } = props;
   // Keys for headers and columns
   const keys = ["name", "city", "state", "telephone", "genre"];
-  const paginatedData = paginateArray(data, 10);
+  const paginatedData = data && paginateArray(data, 10);
 
   const containerCss = css`
     min-height: 50vh;
@@ -110,12 +110,12 @@ const Table = props => {
     );
   };
 
-  return data.length > 0 ? (
+  return data && data.length > 0 ? (
     <Fragment>
       <div css={containerCss}>
         <table css={tableCss}>
           <tbody>
-            {renderHeaders(data[0])}
+            {data.length > 0 && renderHeaders(data[0])}
             {paginatedData.length > 0 && renderTableData(paginatedData[page])}
           </tbody>
         </table>
@@ -134,6 +134,8 @@ const Table = props => {
     </div>
   );
 };
+
+Table.defaultProps = {};
 
 Table.propTypes = {
   data: PropTypes.arrayOf(
