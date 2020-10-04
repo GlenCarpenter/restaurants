@@ -62,12 +62,12 @@ const Search = props => {
       })
       .then(response => {
         setData(response.data);
+        setDisabled(false);
       })
       .catch(error => {
         console.error(error);
+        setDisabled(false);
       });
-
-    setDisabled(false);
   };
 
   const handleReset = () => {
@@ -157,6 +157,7 @@ const Search = props => {
           value='name'
           checked={sortBy === "name"}
           onChange={e => setSortBy(e.target.value)}
+          disabled={disabled}
         />
         <label htmlFor='name'>Name</label>
         <input
@@ -166,6 +167,7 @@ const Search = props => {
           value='state'
           checked={sortBy === "state"}
           onChange={e => setSortBy(e.target.value)}
+          disabled={disabled}
         />
         <label htmlFor='state'>State</label>
       </div>
