@@ -2,7 +2,7 @@
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 
-const Table = props => {
+const Paginator = props => {
   const { pages, setPage } = props;
   const containerCss = css`
     display: flex;
@@ -49,9 +49,9 @@ const Table = props => {
   );
 };
 
-Table.propTypes = {
+Paginator.propTypes = {
   pages: PropTypes.number,
   setPage: PropTypes.func
 };
 
-export default Table;
+export default Paginator;
