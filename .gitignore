@@ -1,6 +1,6 @@
 # dependencies
-./node_modules
-./client/node_modules
+server/node_modules
+server/client/node_modules
 
 # static assets
-./client/build
+server/client/build
