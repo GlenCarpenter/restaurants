@@ -64,15 +64,15 @@ module.exports = app => {
 
     // Apply filters to filteredData array
     if (stateValue !== "") {
-      filteredData = filterByKey(filteredData, "state", stateValue);
+      filteredData = filterByKey(filteredData, "state", stateValue.trim());
     }
     if (genreValue !== "") {
-      filteredData = filterByKey(filteredData, "genre", genreValue);
+      filteredData = filterByKey(filteredData, "genre", genreValue.trim());
     }
     if (attireValue !== "") {
-      filteredData = filterByKey(filteredData, "attire", attireValue);
+      filteredData = filterByKey(filteredData, "attire", attireValue.trim());
     }
-    filteredData = filterByValue(filteredData, searchValue);
+    filteredData = filterByValue(filteredData, searchValue.trim());
 
     // Finally sort the data by either name or state
     const __sortBy = sortBy || "name";
