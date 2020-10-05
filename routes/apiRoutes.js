@@ -46,24 +46,32 @@ module.exports = app => {
 
     const keys = ["name", "state", "genre"];
 
-    const filterByKey = (array, key, value) => {
-      return array.filter(obj =>
-        obj[key].toLowerCase().includes(value.toLowerCase())
+    const filterByKey = (array, key, value) =>
+      array.filter(obj =>
+        obj[key]
+          .toLowerCase()
+          .split(",")
+          .map(el => el.trim())
+          .includes(value.toLowerCase())
       );
-    };
 
-    const filterByValue = (array, value) => {
-      return array.filter(obj =>
+    const filterByValue = (array, value) =>
+      array.filter(obj =>
         keys.some(key => obj[key].toLowerCase().includes(value.toLowerCase()))
       );
-    };
 
     let filteredData = restaurantData.data;
 
     // Apply filters to filteredData array
-    filteredData = filterByKey(filteredData, "state", stateValue);
-    filteredData = filterByKey(filteredData, "genre", genreValue);
-    filteredData = filterByKey(filteredData, "attire", attireValue);
+    if (stateValue !== "") {
+      filteredData = filterByKey(filteredData, "state", stateValue);
+    }
+    if (genreValue !== "") {
+      filteredData = filterByKey(filteredData, "genre", genreValue);
+    }
+    if (attireValue !== "") {
+      filteredData = filterByKey(filteredData, "attire", attireValue);
+    }
     filteredData = filterByValue(filteredData, searchValue);
 
     // Finally sort the data by either name or state

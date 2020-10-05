@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { Fragment } from "react";
+import { titleCase } from "../../utils";
 
 const Search = props => {
   const {
@@ -64,6 +66,36 @@ const Search = props => {
       </option>
     ));
 
+  const renderSelect = (value, setValue, options, label) => (
+    <Fragment>
+      <label htmlFor={`${label}-select`}>Filter by {label}:</label>
+      <select
+        id={`${label}-select`}
+        css={formElementCss}
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        disabled={disabled}
+      >
+        {renderOptions(options)}
+      </select>
+    </Fragment>
+  );
+
+  const renderRadioButton = val => (
+    <Fragment>
+      <input
+        type='radio'
+        name='sort'
+        id={val}
+        value={val}
+        checked={sortBy === val}
+        onChange={e => setSortBy(e.target.value)}
+        disabled={disabled}
+      />
+      <label htmlFor={val}>{titleCase(val)}</label>
+    </Fragment>
+  );
+
   return (
     <form
       css={formCss}
@@ -77,36 +109,9 @@ const Search = props => {
           vertical-align: middle;
         `}
       >
-        <label htmlFor='state-select'>Filter by state:</label>
-        <select
-          id='state-select'
-          css={formElementCss}
-          value={stateValue}
-          onChange={e => setStateValue(e.target.value)}
-          disabled={disabled}
-        >
-          {renderOptions(states)}
-        </select>
-        <label htmlFor='genre-select'>Filter by genre:</label>
-        <select
-          id='genre-select'
-          css={formElementCss}
-          value={genreValue}
-          onChange={e => setGenreValue(e.target.value)}
-          disabled={disabled}
-        >
-          {renderOptions(genres)}
-        </select>
-        <label htmlFor='attire-select'>Filter by attire:</label>
-        <select
-          id='attire-select'
-          css={formElementCss}
-          value={attireValue}
-          onChange={e => setAttireValue(e.target.value)}
-          disabled={disabled}
-        >
-          {renderOptions(attire)}
-        </select>
+        {renderSelect(stateValue, setStateValue, states, "state")}
+        {renderSelect(genreValue, setGenreValue, genres, "genre")}
+        {renderSelect(attireValue, setAttireValue, attire, "attire")}
         <input
           css={[formElementCss, inputCss]}
           type='text'
@@ -118,26 +123,8 @@ const Search = props => {
       </div>
       <div>
         Sort by:
-        <input
-          type='radio'
-          id='name'
-          name='sort'
-          value='name'
-          checked={sortBy === "name"}
-          onChange={e => setSortBy(e.target.value)}
-          disabled={disabled}
-        />
-        <label htmlFor='name'>Name</label>
-        <input
-          type='radio'
-          id='state'
-          name='sort'
-          value='state'
-          checked={sortBy === "state"}
-          onChange={e => setSortBy(e.target.value)}
-          disabled={disabled}
-        />
-        <label htmlFor='state'>State</label>
+        {renderRadioButton("name")}
+        {renderRadioButton("state")}
       </div>
       <div>
         <button css={buttonCss} disabled={disabled}>
