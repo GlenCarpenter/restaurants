@@ -104,13 +104,13 @@ const Table = props => {
     );
   };
 
-  return data && data.length > 0 && paginatedData[page] ? (
+  return data && data.length > 0 ? (
     <Fragment>
       <div css={containerCss}>
         <table css={tableCss}>
           <tbody>
             {renderHeaders(data[0])}
-            {renderTableData(paginatedData[page])}
+            {paginatedData[page] && renderTableData(paginatedData[page])}
           </tbody>
         </table>
       </div>
