@@ -22,7 +22,8 @@ const Paginator = props => {
   const buttonCss = css`
     margin: 12px;
     padding: 12px;
-    color: #fff;
+    color: #000;
+    background-color: #fff;
     border-radius: 5px;
     &:hover {
       cursor: pointer;
@@ -38,7 +39,11 @@ const Paginator = props => {
           css={[
             buttonCss,
             css`
-              background-color: ${page === i - 1 ? "#4caf50" : "DodgerBlue"};
+              ${page === i - 1 &&
+              `
+                color: #fff;
+                background-color: DodgerBlue;
+              `}
             `
           ]}
           onClick={() => setPage(i - 1)}
