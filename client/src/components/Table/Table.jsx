@@ -45,8 +45,7 @@ const Table = props => {
     </tr>
   );
 
-  const renderTableData = data =>
-    data.map((el, i) => <TableRow key={el.id + i} el={el} />);
+  const renderTableData = data => data.map((el, i) => <TableRow key={el.id + i} el={el} />);
 
   const TableRow = props => {
     const [visible, setVisible] = useState(false);
@@ -78,12 +77,8 @@ const Table = props => {
               .filter(key => !keys.includes(key))
               .map((key, i) => {
                 const Element = key === "website" ? "a" : "p";
-                const value =
-                  key === "website"
-                    ? "Click here to visit website"
-                    : `${key}: ${el[key]}`;
-                const attributes =
-                  key === "website" ? { href: el[key], target: "_blank" } : {};
+                const value = key === "website" ? "Click here to visit website" : `${key}: ${el[key]}`;
+                const attributes = key === "website" ? { href: el[key], target: "_blank" } : {};
                 return (
                   <Element
                     key={key + i}
@@ -96,8 +91,7 @@ const Table = props => {
                         color: ${key === "website" ? "Tomato" : "#fff"};
                         background-color: Gray;
                       }
-                      ${key === "website" &&
-                      `color: DodgerBlue; text-decoration: none;`}
+                      ${key === "website" && `color: DodgerBlue; text-decoration: none;`}
                     `}
                   >
                     {value}{" "}
@@ -110,13 +104,13 @@ const Table = props => {
     );
   };
 
-  return data && data.length > 0 ? (
+  return data && data.length > 0 && paginatedData[page] ? (
     <Fragment>
       <div css={containerCss}>
         <table css={tableCss}>
           <tbody>
-            {data.length > 0 && renderHeaders(data[0])}
-            {paginatedData.length > 0 && renderTableData(paginatedData[page])}
+            {renderHeaders(data[0])}
+            {renderTableData(paginatedData[page])}
           </tbody>
         </table>
       </div>
