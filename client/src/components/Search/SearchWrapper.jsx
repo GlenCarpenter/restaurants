@@ -27,8 +27,8 @@ const SearchWrapper = props => {
       })
       .then(response => {
         setData(response.data);
-        setDisabled(false);
       })
+      .then(() => setDisabled(false))
       .catch(error => {
         console.error(error);
         setDisabled(false);
@@ -48,10 +48,10 @@ const SearchWrapper = props => {
       .then(response => {
         setData(response.data);
       })
+      .then(() => setDisabled(false))
       .catch(error => {
         console.log(error);
       });
-    setDisabled(false);
   };
 
   const SearchProps = {
